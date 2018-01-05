@@ -29,5 +29,4 @@ node<int> *lca(node<int> *root, int v1, int v2)
 			}
 		}
 	}
-
 }
