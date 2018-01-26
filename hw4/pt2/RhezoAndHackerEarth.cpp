@@ -3,9 +3,10 @@
 #include"graph.cpp"
 #include<string>
 using namespace std;
-
-void readFromFileAndAddBothWays(graph<int>& g, string filename) //reads a file with ribs but adds them both ways 
-{																// if file says "a b" it adds a->b and b->a
+//reads a file with ribs but adds them both ways 
+// if file says "a b" it adds a->b and b->a
+void readFromFileAndAddBothWays(graph<int>& g, string filename) 
+{																
 	ifstream is(filename, ios::in);
 	int leftNum, rightNum;
 	while (!is.eof())

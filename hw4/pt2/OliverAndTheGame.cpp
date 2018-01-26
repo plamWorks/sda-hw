@@ -3,11 +3,13 @@
 #include"graph.cpp"
 #include<string>
 using namespace std;
-
-void readFromFile(graph<int>& gToRoot, graph<int>& gFromRoot, string filename)  // creating 2 graphs
+// creating 2 graphs
+// gToRoot is for when the query starts with 0
+// gFromRoot is for when the query starts with 1
+void readFromFile(graph<int>& gToRoot, graph<int>& gFromRoot, string filename)  
 {
-	ifstream is(filename, ios::in);                                          // gToRoot is for when the query starts with 0
-	int leftNum, rightNum;													 // gFromRoot is for when the query starts with 1
+	ifstream is(filename, ios::in);                                        
+	int leftNum, rightNum;													 
 	while (!is.eof())
 	{
 		is >> leftNum >> rightNum;

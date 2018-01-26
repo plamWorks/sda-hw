@@ -70,9 +70,13 @@ void hasCycleFromTop(graph<int>& g, LList<int>& l, const int& a, bool& flag)  //
 		q = q->link;
 	}
 }
-bool hasCycle(graph<int> & g)  // gets the first top of the graph and checks if there are any cycles.
-{									// There is no need to check for the other vertexes
-	LList<int> l,v = g.vertexes();   // bc at this stage we assume that the graph is connected
+
+// gets the first top of the graph and checks if there are any cycles.
+// There is no need to check for the other vertexes
+// bc at this stage we assume that the graph is connected
+bool hasCycle(graph<int> & g) 
+{									
+	LList<int> l,v = g.vertexes();   
 	v.IterStart();
 	bool result = false;
 	elem_link1<int> * p = v.Iter();
