@@ -1,19 +1,14 @@
-/*
-Detect a cycle in a linked list. Note that the head pointer may be 'NULL' if the list is empty.
-
-A Node is defined as:
-struct Node {
-int data;
-struct Node* next;
-}
-*/
+#include<iostream>
+#include"llist.cpp"
 #include<vector>
-bool has_cycle(Node* head) {
+using namespace std;
+bool has_cycle(LList<int>& l) {
 
-	if (head)
+	if (!l.empty())
 	{
-		vector<Node*> adresses;
-		Node* p = head;
+		vector<elem_link1<int>*> adresses;
+		l.IterStart();
+		elem_link1<int> * p = l.Iter();
 		while (p)
 		{
 			for (int i = 0; i < adresses.size(); i++)
@@ -24,14 +19,23 @@ bool has_cycle(Node* head) {
 				}
 			}
 			adresses.push_back(p);
-			p = p->next;
+			p = p->link;
 		}
-		return false;
 	}
-	else
-	{
-		return false;
-	}
-	// Complete this function
-	// Do not write the main method
+	return false;
+}
+int main()
+{
+	LList<int> a;
+	a.ToEnd(2);
+	a.ToEnd(10);
+	a.ToEnd(3);
+	a.IterStart();
+	elem_link1<int> * p = a.Iter();
+	elem_link1<int> * q = p;
+	p = p->link;
+	p->link = q;
+	cout << has_cycle(a) << endl;
+	system("pause");
+	return 0;
 }

@@ -1,35 +1,48 @@
+#include<iostream>
+#include"llist.cpp"
+using namespace std;
 /*
 Remove all duplicate elements from a sorted linked list
-Node is defined as
 */
-struct Node
+void RemoveDuplicates(LList<int>& l)
 {
-int data;
-struct Node *next;
-}
-
-Node* RemoveDuplicates(Node *head)
-{
-	if (head == NULL)
+	l.IterStart();
+	elem_link1<int>* p = l.Iter();
+	if (p == NULL)
 	{
-		return NULL;
+		return;
 	}
 	else
 	{
-		Node* p = head;
-		while (p->next)
+		while (p->link)
 		{
-			Node* q = p->next;
-			if (p->data == q->data)
+			elem_link1<int>* q = p->link;
+			if (p->inf == q->inf)
 			{
-				p->next = q->next;
+				p->link = q->link;
 				delete q;
 			}
 			else
 			{
-				p = p->next;
+				p = p->link;
 			}
 		}
 	}
-	return head;
+}
+int main()
+{
+	LList<int> l;
+	l.ToEnd(1);
+	l.ToEnd(2);
+	l.ToEnd(2);
+	l.ToEnd(3);
+	l.ToEnd(3);
+	l.ToEnd(3);
+
+	RemoveDuplicates(l);
+	l.print();
+
+
+	system("pause");
+	return 0;
 }

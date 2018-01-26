@@ -1,43 +1,36 @@
 #include<iostream>
+#include"dllist.cpp"
 using namespace std;
-/*
-Reverse a doubly linked list, input list may also be empty
-Node is defined as
-*/
-struct Node
-{
-int data;
-Node *next;
-Node *prev;
-};
 
-Node* Reverse(Node* head)
+void DList<int>::Reverse()
 {
-	if (head != NULL)
+	node<int>* p = start;
+	if (p)
 	{
-		Node* p = head;
 		p->prev = p->next;
 		p->next = NULL;
-		Node* temp;
+		node<int>* q;
 		while (p->prev)
 		{
 			p = p->prev;
-			temp = p->next;
+			q = p->next;
 			p->next = p->prev;
-			p->prev = temp;
+			p->prev = q;
 		}
-		return p;
 	}
-	else
-	{
-		return NULL;
-	}
-	// Complete this function
-	// Do not write the main method. 
+	start = p;
 }
-
 int main()
 {
-	cin.get();
+	DList<int> dl;
+	dl.ToEnd(2);
+	dl.ToEnd(10);
+	dl.ToEnd(15);
+	dl.ToEnd(31);
+	dl.ToEnd(11);
+	dl.print();
+	dl.Reverse();
+	dl.print();
+	system("pause");
 	return 0;
 }

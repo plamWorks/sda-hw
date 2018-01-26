@@ -1,32 +1,69 @@
-node<int> *lca(node<int> *root, int v1, int v2)
+#include "BinOrdTree.cpp"
+#include<queue>
+#include <iostream>
+using namespace std;
+
+bool contains(BinOrdTree<int>& bot, int n)
 {
-	int resultLeft = contains(root->left, v1) + contains(root->left, v2);
-	int resultRight = contains(root->right, v1) + contains(root->right, v2);
-	if (resultLeft == 1 || resultRight == 1)
-		return root;
+	if (bot.empty())
+	{
+		return false;
+	}
+	if (bot.RootTree() == n)
+	{
+		return true;
+	}
+
 	else
 	{
-		if (resultLeft && root->left)
+		return contains(bot.LeftTree(), n) || contains(bot.RightTree(), n);
+	}
+}
+
+int lca(BinOrdTree<int>& bot, int v1, int v2)
+{
+	int resultLeft = contains(bot.LeftTree(), v1) + contains(bot.LeftTree(), v2);
+	int resultRight = contains(bot.RightTree(), v1) + contains(bot.RightTree(), v2);
+	if (resultLeft == 1 || resultRight == 1)
+		return bot.RootTree();
+	else
+	{
+		if (resultLeft && !bot.LeftTree().empty())
 		{
-			if (root->left->inf == v1 || root->left->inf == v2)
+			if (bot.LeftTree().RootTree() == v1 || bot.LeftTree().RootTree() == v2)
 			{
-				return root;
+				return bot.RootTree();
 			}
 			else
 			{
-				return lca(root->left, v1, v2);
+				return lca(bot.LeftTree(), v1, v2);
 			}
 		}
-		if (resultRight && root->right)
+		else if (resultRight && !bot.RightTree().empty())
 		{
-			if (root->right->inf == v1 || root->right->inf == v2)
+			if (bot.RightTree().RootTree() == v1 || bot.RightTree().RootTree())
 			{
-				return root;
+				return  bot.RootTree();
 			}
 			else
 			{
-				return lca(root->right, v1, v2);
+				return lca(bot.RightTree(), v1, v2);
 			}
+		}
+		else
+		{
+			return bot.RootTree();
 		}
 	}
+
+}
+int main() {
+	BinOrdTree<int> bot;
+	bot.Create();
+	int v, w;
+	cin >> v >> w;
+	int p = lca(bot, v, w);
+	cout << "LCA is " << p << endl;
+	system("pause");
+	return 0;
 }

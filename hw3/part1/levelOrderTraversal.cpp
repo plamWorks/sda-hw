@@ -1,12 +1,18 @@
-void levelOrder(node * root) {
-	queue<node*> q;
+#include "BinTree.cpp"
+#include<queue>
+#include <iostream>
+using namespace std;
+
+template<class T>
+void BinTree<T>::traversalPrint() const
+{
+	queue<node<T>*> q;
 	if (root != NULL)
 	{
 		q.push(root);
-
 		while (!q.empty())
 		{
-			node* current = q.front();
+			node<T>* current = q.front();
 			q.pop();
 			if (current->left)
 			{
@@ -16,7 +22,15 @@ void levelOrder(node * root) {
 			{
 				q.push(current->right);
 			}
-			cout << current->data << " ";
+			cout << current->inf << " ";
 		}
 	}
+}
+1
+int main() {
+	BinTree<int> tree;
+	tree.Create();
+	tree.traversalPrint();
+	system("pause");
+	return 0;
 }
